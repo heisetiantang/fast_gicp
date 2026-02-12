@@ -8,6 +8,9 @@ option(BUILD_PYTHON_BINDINGS "Build python bindings" OFF)
 
 set(CMAKE_BUILD_TYPE "Release")
 
+# 在旧工程中，先显式查找 Boost 再查找 PCL，可以避免 PCLConfig 中因 Boost 未解析导致的错误
+# 这里对齐 /home/gjm/hdl/src/fast_gicp/CMakeLists.txt 的写法
+find_package(Boost REQUIRED COMPONENTS filesystem date_time iostreams system)
 find_package(PCL REQUIRED)
 find_package(Eigen3 REQUIRED)
 add_definitions(${PCL_DEFINITIONS})
